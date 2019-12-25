@@ -28,6 +28,10 @@ class MyForm(FlaskForm):
 
 def sc(tx, bg):
 
+    if bg == "":
+        bg = "white"
+    
+    
     stylecloud.gen_stylecloud(text=tx,
                               background_color=bg, output_name=OUTPUT_NAME)
     pil_im = Image.open(OUTPUT_NAME)
