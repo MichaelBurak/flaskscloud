@@ -1,0 +1,11 @@
+<html>
+
+<body>
+  <form method="POST">
+    {{ form.csrf_token }}
+    <div>{{ form.txt.label }} {{form.txt()}} {{form.submit()}}</div>
+  </form>
+  <img src="../static/out.png" />
+</body>
+
+</html>
