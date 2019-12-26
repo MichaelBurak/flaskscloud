@@ -68,6 +68,9 @@ def index():
 def img():
     return render_template('img.html', img=img)
 
+@app.route('/sepia')
+def sepia():
+    return render_template('sepia.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=9000)
