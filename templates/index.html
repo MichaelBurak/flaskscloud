@@ -1,14 +1,36 @@
 <html>
 
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
 <body>
-  <form method="POST">
-    {{ form.csrf_token }}
-    <div>{{ form.txt.label }} {{form.txt()}}</div>
-    <div>{{form.bgcolor.label}} {{form.bgcolor()}}</div>
-    <div>{{form.color.label}} {{form.color()}}</div>
-    <div> {{form.submit()}}</div>
-  </form>
-  <img src="../static/out.png" />
+  <div class="container-fluid bg-info">
+    <div class="form-group">
+      <form method="POST">
+        <div class="row justify-content-md-center">
+          <div class="card bg-light border-info mb-3 " style="width: 18rem;">
+            {{ form.csrf_token }}
+
+            <div class="card-body shadow-lg">
+
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"> {{ form.txt.label }} {{form.txt()}}</li>
+                <li class="list-group-item">{{form.bgcolor.label}} {{form.bgcolor()}}</li>
+                <li class="list-group-item">{{form.color.label}} {{form.color()}}</li>
+                <li class="list-group-item">{{form.submit()}}</li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row justify-content-md-center ">
+      <img src="../static/out.png" class="rounded-lg shadow-lg border-danger" />
+    </div>
+  </div>
 </body>
 
 </html>
