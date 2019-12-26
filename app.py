@@ -1,5 +1,7 @@
-from flask import Flask, render_template, send_file, make_response, Response
+from flask import Flask, render_template, send_file, make_response, Response, redirect
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField
+from werkzeug import secure_filename
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 import stylecloud
@@ -28,7 +30,11 @@ class MyForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-def sc(tx, bg, clr):
+class UploadForm(FlaskForm):
+    file = FileField()
+
+
+def sc(tx=None, bg="white", clr=None, fp=None):
 
     if bg == "":
         bg = "white"
@@ -37,7 +43,7 @@ def sc(tx, bg, clr):
         clr = None
     
     stylecloud.gen_stylecloud(text=tx,
-                              background_color=bg, output_name=OUTPUT_NAME, colors=clr)
+                              background_color=bg, output_name=OUTPUT_NAME, colors=clr, file_path=fp)
     pil_im = Image.open(OUTPUT_NAME)
     file_object = io.BytesIO()
 
@@ -63,6 +69,22 @@ def index():
         return resp
     return render_template('index.html', img=img, form=form, place=place)
 
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    form = UploadForm()
+
+    if form.validate_on_submit():
+        filename = secure_filename(form.file.data.filename)
+        path = 'static/text.txt'
+        form.file.data.save(path)
+        sc(fp=path)
+        resp = make_response(render_template('img.html')) #here you could use make_response(render_template(...)) too
+        resp.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+        resp.headers['Cache-Control'] = 'public, max-age=0'
+        return resp
+
+    return render_template('upload.html', form=form)
 
 @app.route('/img')
 def img():
