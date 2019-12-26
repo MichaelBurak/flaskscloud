@@ -23,18 +23,21 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 class MyForm(FlaskForm):
     txt = StringField('Text here')
+    color = StringField("Select a solid color for text if you want")
     bgcolor = StringField('Select a background color')
     submit = SubmitField('Submit')
 
 
-def sc(tx, bg):
+def sc(tx, bg, clr):
 
     if bg == "":
         bg = "white"
     
+    if clr == "":
+        clr = None
     
     stylecloud.gen_stylecloud(text=tx,
-                              background_color=bg, output_name=OUTPUT_NAME)
+                              background_color=bg, output_name=OUTPUT_NAME, colors=clr)
     pil_im = Image.open(OUTPUT_NAME)
     file_object = io.BytesIO()
 
@@ -53,7 +56,7 @@ def index():
     
     place = ""
     if form.validate_on_submit():
-        img = sc(form.txt.data,form.bgcolor.data)
+        img = sc(form.txt.data,form.bgcolor.data, form.color.data)
         resp = make_response(render_template('img.html')) #here you could use make_response(render_template(...)) too
         resp.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
         resp.headers['Cache-Control'] = 'public, max-age=0'
