@@ -17,8 +17,12 @@
 
               <ul class="list-group list-group-flush">
                 <li class="list-group-item"> {{ form.txt.label }} {{form.txt()}}</li>
-                <li class="list-group-item">{{form.bgcolor.label}} {{form.bgcolor()}}</li>
-                <li class="list-group-item">{{form.color.label}} {{form.color()}}</li>
+                <li class="list-group-item">{{form.bgcolor.label}} {{form.bgcolor()}}
+                  <small class="text-muted">(leave blank for white)</small>
+                </li>
+                <li class="list-group-item">{{form.color.label}} {{form.color()}}
+                  <small class="text-muted">(leave blank for color palette on text)</small>
+                </li>
                 <li class="list-group-item">{{form.submit()}}</li>
 
               </ul>
@@ -28,7 +32,13 @@
       </form>
     </div>
     <div class="row justify-content-md-center ">
-      <img src="../static/out.png" class="rounded-lg shadow-lg border-danger" />
+      <img src="../static/out.png" class="rounded-lg shadow-lg border-danger img-fluid" alt="Responsive image" />
+
+      <div class="alert alert-secondary" role="alert">
+        Credit to <a href="https://minimaxir.com/" class="alert-link">Max Woolf</a> for the stylecloud project that
+        generates wordclouds, details including licenses can be found on <a
+          href="https://github.com/minimaxir/stylecloud" class="alert-link"> github.</a>
+      </div>
     </div>
   </div>
 </body>
