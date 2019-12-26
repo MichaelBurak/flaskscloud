@@ -22,7 +22,7 @@ OUTPUT_NAME = "./static/out.png"
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 class MyForm(FlaskForm):
-    txt =  TextAreaField('Text here')
+    txt =  TextAreaField('Enter Text Here!')
     color = StringField("Select a solid color for text if you want")
     bgcolor = StringField('Select a background color')
     submit = SubmitField('Submit')
