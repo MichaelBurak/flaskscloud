@@ -4,8 +4,9 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import stylecloud
 from PIL import Image
-from starlette.responses import FileResponse
 import io
+import matplotlib
+matplotlib.use('TkAgg')
 
 import os 
 
