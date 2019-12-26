@@ -1,15 +1,27 @@
 <html>
 
 <head>
-    <title>Upload A Text File</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
+
 <body>
-    <form method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        {{ form.file }}
-        <input type="submit">
-    </form>
+    <div class="container-fluid bg-info">
+        <div class="row justify-content-md-center">
+            <div class="jumbotron">
+                <h1 class="display-4">Upload a text file</h1>
+                <p class="lead">.txt files are best, I haven't tested with .rtf or others.</p>
+
+            </div>
+
+            <form method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                {{ form.file }}
+                <input type="submit">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
