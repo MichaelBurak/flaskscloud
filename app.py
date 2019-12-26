@@ -1,12 +1,11 @@
 from flask import Flask, render_template, send_file, make_response, Response
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField,BooleanField
+from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired
 import stylecloud
 from PIL import Image
 import io
 import matplotlib
-import palettable
 matplotlib.use('TkAgg')
 
 import os 
@@ -26,11 +25,10 @@ class MyForm(FlaskForm):
     txt =  TextAreaField('Text here')
     color = StringField("Select a solid color for text if you want")
     bgcolor = StringField('Select a background color')
-    moonrise = BooleanField('Moonrise Kingdom Mode Colors?')
     submit = SubmitField('Submit')
 
 
-def sc(tx, bg, clr, mk):
+def sc(tx, bg, clr):
 
     if bg == "":
         bg = "white"
@@ -38,14 +36,8 @@ def sc(tx, bg, clr, mk):
     if clr == "":
         clr = None
     
-    if mk == False:
-        mk = 'cartocolors.qualitative.Bold_5'
-    
-    if mk == True:
-        mk = 'Moonrise1_5'
-
     stylecloud.gen_stylecloud(text=tx,
-                              background_color=bg, output_name=OUTPUT_NAME, colors=clr, palette=mk)
+                              background_color=bg, output_name=OUTPUT_NAME, colors=clr)
     pil_im = Image.open(OUTPUT_NAME)
     file_object = io.BytesIO()
 
@@ -64,7 +56,7 @@ def index():
     
     place = ""
     if form.validate_on_submit():
-        img = sc(form.txt.data,form.bgcolor.data, form.color.data, form.moonrise.data)
+        img = sc(form.txt.data,form.bgcolor.data, form.color.data)
         resp = make_response(render_template('img.html')) #here you could use make_response(render_template(...)) too
         resp.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
         resp.headers['Cache-Control'] = 'public, max-age=0'
