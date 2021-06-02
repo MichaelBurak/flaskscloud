@@ -25,7 +25,7 @@ starlette==0.13.0
 stylecloud==0.4.2
 termcolor==1.1.0
 tinycss==0.4
-urllib3==1.25.7
+urllib3==1.26.5
 Werkzeug==0.16.0
 wordcloud==1.6.0
 WTForms==2.2.1
